@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import json
 import re
 import time
@@ -65,6 +63,10 @@ def update_presence(status):
         info = status.get('information', {})
         filename = info.get('category', {}).get('meta', 'Unknown')
 
+        # Ensure filename is a string
+        if isinstance(filename, dict):
+            filename = filename.get('filename', 'Unknown')
+
         # Check if the filename has changed
         if filename != last_filename:
             last_filename = filename
@@ -121,9 +123,9 @@ def update_presence(status):
         RPC.update(
             details="VLC is idle",
             state="No media playing",
-            large_image="vlc_logo",
-            large_text="VLC Media Player",
-            start=int(time.time())
+            large_image": "vlc_logo",
+            large_text": "VLC Media Player",
+            start": int(time.time())
         )
 
 # Main loop to update presence
