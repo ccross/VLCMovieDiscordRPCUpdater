@@ -1,0 +1,7 @@
+{
+    "discord_client_id": "YOUR_CLIENT_ID",
+    "vlc_http_password": "your_password",
+    "omdb_api_key": "your_omdb_api_key",
+    "vlc_http_host": "localhost",
+    "vlc_http_port": "8080"
+}
