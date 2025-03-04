@@ -36,8 +36,8 @@ def get_vlc_status():
         return None
 
 def extract_movie_info_from_filename(filename):
-    # Regular expression to match the filename format
-    pattern = r"(.+) \((\d{4})\)\.\w+\s*\{.*\}\.mkv"
+    # Regular expression to match the filename format, with optional {Edition-VERSION} part
+    pattern = r"(.+) \((\d{4})\)\.\w+(?:\s*\{.*\})?\.mkv"
     match = re.match(pattern, filename)
     if match:
         title = match.group(1)
@@ -83,7 +83,7 @@ def update_presence(status):
                     state = f"Directed by {movie_director} | {movie_genre}"
 
                     # Construct Letterboxd URL
-                    letterboxd_url = f"https://letterboxd.com/tmdb/{imdb_id}/"
+                    letterboxd_url = f"https://letterboxd.com/imdb/{imdb_id}/"
 
                     current_presence_data = {
                         "details": details[:128],
