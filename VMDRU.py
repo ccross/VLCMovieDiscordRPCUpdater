@@ -78,6 +78,7 @@ def update_presence(status):
                     movie_director = movie_info.get('Director', 'Unknown')
                     movie_genre = movie_info.get('Genre', 'Unknown')
                     imdb_id = movie_info.get('imdbID', '')
+                    poster_url = movie_info.get('Poster', '')
 
                     details = f"Watching: {movie_title} ({movie_year})"
                     state = f"Directed by {movie_director} | {movie_genre}"
@@ -88,10 +89,10 @@ def update_presence(status):
                     current_presence_data = {
                         "details": details[:128],
                         "state": state[:128],
-                        "large_image": "vlc_logo",
-                        "large_text": "VLC Media Player",
-                        "small_image": "playing",
-                        "small_text": "Now Playing",
+                        "large_image": poster_url,  # Use the poster URL from OMDb
+                        "large_text": movie_title,  # Movie title as tooltip
+                        "small_image": "https://ccross.github.io/VLCMovieDiscordRPCUpdater/movie.png",  # Playing icon
+                        "small_text": movie_title,  # Movie title as tooltip
                         "start": int(time.time()),
                         "buttons": [{"label": "View on Letterboxd", "url": letterboxd_url}]
                     }
@@ -101,16 +102,20 @@ def update_presence(status):
                     current_presence_data = {
                         "details": details[:128],
                         "state": "No additional info available",
-                        "large_image": "vlc_logo",
-                        "large_text": "VLC Media Player",
+                        "large_image": "https://example.com/large_image.png",  # Replace with your large image URL
+                        "large_text": title,  # Movie title as tooltip
+                        "small_image": "https://ccross.github.io/VLCMovieDiscordRPCUpdater/movie.png",  # Playing icon
+                        "small_text": title,  # Movie title as tooltip
                         "start": int(time.time())
                     }
             else:
                 current_presence_data = {
                     "details": "Watching a movie",
                     "state": "Filename format not recognized",
-                    "large_image": "vlc_logo",
-                    "large_text": "VLC Media Player",
+                    "large_image": "https://example.com/large_image.png",  # Replace with your large image URL
+                    "large_text": "",  # Empty large text
+                    "small_image": "https://ccross.github.io/VLCMovieDiscordRPCUpdater/movie.png",  # Playing icon
+                    "small_text": "Unknown Movie",  # Unknown movie title as tooltip
                     "start": int(time.time())
                 }
 
@@ -122,8 +127,10 @@ def update_presence(status):
         RPC.update(
             details="VLC is idle",
             state="No media playing",
-            large_image="vlc_logo",
-            large_text="VLC Media Player",
+            large_image="https://example.com/large_image.png",  # Replace with your large image URL
+            large_text="",  # Empty large text
+            small_image="https://ccross.github.io/VLCMovieDiscordRPCUpdater/stop.png",  # Stopped icon
+            small_text="Nothing Playing",
             start=int(time.time())
         )
 
