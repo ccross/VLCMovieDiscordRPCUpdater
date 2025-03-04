@@ -63,11 +63,8 @@ def update_presence(status):
 
     if status and status.get('state') == 'playing':
         info = status.get('information', {})
-        filename = info.get('category', {}).get('meta', 'Unknown')
-
-        # Ensure filename is a string
-        if isinstance(filename, dict):
-            filename = filename.get('filename', 'Unknown')
+        meta = info.get('category', {}).get('meta', {})
+        filename = meta.get('filename', 'Unknown')
 
         # Check if the filename has changed
         if filename != last_filename:
